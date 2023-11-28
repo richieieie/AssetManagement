@@ -16,7 +16,7 @@ public class ObjectList<T> extends ArrayList<T> {
     @SuppressWarnings("unchecked")
     public ObjectList(String path) {
         if(IOExecutor.readFromFile(path, (List<Object>) this))
-            System.out.println("Data is read (" + this.getClass() + ")");
+            System.out.println("Data is read into (" + this.getClass() + ")");
         this.path = path;
     }
 

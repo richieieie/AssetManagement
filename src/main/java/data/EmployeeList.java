@@ -32,12 +32,12 @@ public class EmployeeList extends ObjectList<Employee> {
     public Employee login() {
         // Get id from user
         String id;
-        do {
-            id = Inputter.getString("ID (E000000): ", "[Ee]\\d{6}", "Please enter with " +
-                    "(E000000) " + "format").toUpperCase();
-            if (objectNotFound(id))
-                System.out.println("ID " + id + " doesn't existed");
-        } while (objectNotFound(id));
+        id = Inputter.getString("ID (E000000): ", "[Ee]\\d{6}", "Please enter with " +
+                "(E000000) " + "format").toUpperCase();
+        if (objectNotFound(id)) {
+            System.out.println("ID " + id + " doesn't existed");
+            return null;
+        }
 
         // Get password from user
         String password = Inputter.getString("Password: ");
@@ -66,12 +66,12 @@ public class EmployeeList extends ObjectList<Employee> {
 
         // Get account's id from user and check if it existed or not
         String id;
-        do {
-            id = Inputter.getString("ID (E000000): ", "[Ee]\\d{6}", "Please enter with " +
-                    "(E000000) " + "format").toUpperCase();
-            if (!objectNotFound(id))
-                System.out.println("ID " + id + " existed");
-        } while (!objectNotFound(id));
+        id = Inputter.getString("ID (E000000): ", "[Ee]\\d{6}", "Please enter with " +
+                "(E000000) " + "format").toUpperCase();
+        if (!objectNotFound(id)) {
+            System.out.println("ID " + id + " existed");
+            return null;
+        }
 
         // Get account's info from user
         String name = Inputter.getStringWithCap("Name: ");

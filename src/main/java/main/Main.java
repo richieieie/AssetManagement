@@ -8,47 +8,39 @@ import utils.Visual;
 import java.io.UnsupportedEncodingException;
 
 public class Main {
-    public static void main(String[] args) {
-        try {
-            // You can delete this method and all dat files if you don't want to initialize raw
-            // data. You can change the path name to store dat files in DataInitiator.java
-            DataInitiator.addAll();
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        // You can delete this method and all dat files if you don't want to initialize raw
+        // data. You can change the path name to store dat files in DataInitiator.java
+        DataInitiator.addAll();
 
-            AssetList assets = DataInitiator.assets;
-            RequestList requests = DataInitiator.requests;
-            BorrowList borrows = DataInitiator.borrows;
-            EmployeeList employees = DataInitiator.employees;
-            Employee em = null;
+        AssetList assets = DataInitiator.assets;
+        RequestList requests = DataInitiator.requests;
+        BorrowList borrows = DataInitiator.borrows;
+        EmployeeList employees = DataInitiator.employees;
+        Employee em = null;
 
-            requests.showAll();
-            assets.showAll();
-            borrows.showAll();
+        // Prompt user to choose option
+        int choice;
+        do {
+            Visual.printMenu(DataInitiator.menuOptions);
+            choice = Inputter.getInt("Your choice: ");
 
-            // Prompt user to choose option
-            int choice;
-            do {
-                Visual.printMenu(DataInitiator.menuOptions);
-                choice = Inputter.getInt("Your choice: ");
+            switch (choice) {
+                case 1 -> em = Executor.logUserIn(employees, em);
+                case 2 -> Executor.registerAccount(employees, em);
+                case 3 -> Executor.createAsset(assets, em);
+                case 4 -> Executor.editAsset(assets, em);
+                case 5 -> Executor.approveRequest(requests, borrows, assets, em);
+                case 6 -> Executor.showAllBorrowReqs(borrows, em);
+                case 7 -> Executor.findAssetsByName(assets, em);
+                case 8 -> Executor.sendANewRequest(assets, requests, em);
+                case 9 -> Executor.cancelRequest(requests, em);
+                case 10 -> Executor.returnBorrowRequest(assets, borrows, requests, em);
+                case 11 -> em = Executor.logUserOut(em);
+                default -> System.out.println("Exiting...");
+            }
+        } while (choice >= 1 && choice <= 11);
 
-                switch (choice) {
-                    case 1 -> em = Executor.logUserIn(employees, em);
-                    case 2 -> Executor.registerAccount(employees, em);
-                    case 3 -> Executor.createAsset(assets, em);
-                    case 4 -> Executor.editAsset(assets, em);
-                    case 5 -> Executor.approveRequest(requests, borrows, assets, em);
-                    case 6 -> Executor.showAllBorrowReqs(borrows, em);
-                    case 7 -> Executor.findAssetsByName(assets, em);
-                    case 8 -> Executor.sendANewRequest(assets, requests, em);
-                    case 9 -> Executor.cancelRequest(requests, em);
-                    case 10 -> Executor.returnBorrowRequest(assets, borrows, requests, em);
-                    case 11 -> em = Executor.logUserOut(em);
-                    default -> System.out.println("Exiting...");
-                }
-            } while (choice >= 1 && choice <= 11);
-
-            Inputter.scanner.close();
-        } catch (UnsupportedEncodingException e) {
-            System.out.println("Encoding or decoding errors");
-        }
+        Inputter.scanner.close();
     }
 }

@@ -12,7 +12,6 @@ public class Executor {
             return;
 
         if (Objects.isNull(employeeList.register())) {
-            System.out.println("Failed to register");
             return;
         }
 
@@ -112,6 +111,8 @@ public class Executor {
     public static void editAsset(AssetList assetList, Employee e) {
         if (!Employee.checkStatus(e, "MA"))
             return;
+
+        assetList.showAll();
 
         if (!assetList.updateAsset())
             System.out.println("Failed to update the asset!!!");

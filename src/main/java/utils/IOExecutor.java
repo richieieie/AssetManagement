@@ -9,7 +9,7 @@ public class IOExecutor {
         try {
             File file = new File(path);
             if (file.createNewFile())
-                System.out.println("New file is created");
+                System.out.println("New file is created " + list.getClass().getSimpleName());
             FileOutputStream fos = new FileOutputStream(file, false);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
