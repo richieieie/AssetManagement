@@ -21,6 +21,13 @@ public class BorrowList extends ObjectList<Borrow> {
         return null;
     }
 
+    public void searchBorrowsByEID(String eID) {
+        BorrowList cpyB = new BorrowList();
+        cpyB.addAll(this.stream().filter(b -> b.getEmployeeId().equals(eID)).toList());
+
+        cpyB.showAll();
+    }
+
     @Override
     public void showAll() {
         Visual.printDataList(this, new String[]{"ID", "Asset ID", "Employee ID", "Quantity",

@@ -11,7 +11,7 @@ public class Executor {
         if (!Employee.checkStatus(e, "MA"))
             return;
 
-        if(Objects.isNull(employeeList.register())) {
+        if (Objects.isNull(employeeList.register())) {
             System.out.println("Failed to register");
             return;
         }
@@ -51,12 +51,52 @@ public class Executor {
             subChoice = Inputter.getInt("Your choice: ");
 
             if (subChoice == 1) {
-                if (!assetList.createNewAsset()) {
+                if (!assetList.createNew())
                     System.out.println("Failed to create new asset, please try " +
                             "again!!!");
-                } else {
+                else
                     System.out.println("A new asset is added");
-                }
+
+            }
+
+        } while (subChoice == 1);
+    }
+
+    public static void cancelRequest(RequestList requestList, Employee e) {
+        if (!Employee.checkStatus(e))
+            return;
+
+        int subChoice;
+        do {
+            Visual.printMenu(new String[]{"Continue cancelling"});
+            subChoice = Inputter.getInt("Your choice: ");
+
+            if (subChoice == 1) {
+                if (!requestList.cancelOne(e))
+                    System.out.println("You don't have any borrow requests now or wrong ID!!!");
+                else
+                    System.out.println("Request is cancelled");
+            }
+
+        } while (subChoice == 1);
+    }
+
+    public static void returnBorrowRequest(AssetList assetList, BorrowList borrowList,
+                                           RequestList requestList,
+                                           Employee e) {
+        if (!Employee.checkStatus(e))
+            return;
+
+        int subChoice;
+        do {
+            Visual.printMenu(new String[]{"Continue returning"});
+            subChoice = Inputter.getInt("Your choice: ");
+
+            if (subChoice == 1) {
+                if (!requestList.returnOne(e, assetList, borrowList))
+                    System.out.println("You don't have any borrow requests now or wrong ID!!!");
+                else
+                    System.out.println("Asset is returned");
             }
 
         } while (subChoice == 1);
@@ -80,11 +120,32 @@ public class Executor {
     }
 
     public static void findAssetsByName(AssetList assetList, Employee e) {
-        if (Objects.isNull(e)) {
-            System.out.println("You must log in before using the program!!!");
+        if (!Employee.checkStatus(e)) {
             return;
         }
+
         assetList.searchAssetsByName(Inputter.getStringWithCap("Name: "));
+    }
+
+    public static void sendANewRequest(AssetList assetList, RequestList requestList, Employee e) {
+        if (!Employee.checkStatus(e))
+            return;
+
+        assetList.showAll();
+        int subChoice;
+        do {
+            Visual.printMenu(new String[]{"Send request"});
+            subChoice = Inputter.getInt("Your choice: ");
+
+            if (subChoice == 1) {
+                if (!requestList.sendNew(e, assetList))
+                    System.out.println("Asset is not found or failed to send a " +
+                            "new request. Please try again!!!");
+                else
+                    System.out.println("A new request is sent");
+            }
+
+        } while (subChoice == 1);
     }
 
     public static void approveRequest(RequestList requestList, BorrowList borrowList,

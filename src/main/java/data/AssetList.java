@@ -6,7 +6,6 @@ import utils.Visual;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class AssetList extends ObjectList<Asset> {
     public AssetList() {
@@ -21,24 +20,8 @@ public class AssetList extends ObjectList<Asset> {
         AssetList cpyA = new AssetList();
         cpyA.addAll(this.stream().filter(a -> a.getName().toLowerCase().contains(name.toLowerCase())).toList());
 
-        Visual.printDataList(cpyA, new String[]{"ID", "Name", "Color", "Price", "Weight",
-                "Quantity"}, "ASSETS");
+        cpyA.showAll();
     }
-
-    public boolean createNewAsset() {
-        // ID now will be auto generated uniquely
-        String id = Inputter.generateUniqueId("A", 3, this);
-
-        // Get others data from user
-        String name = Inputter.getStringWithCap("Name: ");
-        String color = Inputter.getStringWithCap("Color: ");
-        int price = Inputter.getInt("Price: ", 1, Integer.MAX_VALUE);
-        double weight = Inputter.getDouble("Weight: ", 1, 100);
-        int quantity = Inputter.getInt("Quantity: ", 1, Integer.MAX_VALUE);
-
-        return addNew(new Asset(id, name, color, price, weight, quantity));
-    }
-
     public Asset searchById(String id) {
         for (Asset a : this) {
             if (a.getId().equals(id))
@@ -56,6 +39,21 @@ public class AssetList extends ObjectList<Asset> {
 
         return -1;
     }
+
+    public boolean createNew() {
+        // ID now will be auto generated uniquely
+        String id = Inputter.generateUniqueId("A", 3, this);
+
+        // Get others data from user
+        String name = Inputter.getStringWithCap("Name: ");
+        String color = Inputter.getStringWithCap("Color: ");
+        int price = Inputter.getInt("Price: ", 1, Integer.MAX_VALUE);
+        double weight = Inputter.getDouble("Weight: ", 1, 100);
+        int quantity = Inputter.getInt("Quantity: ", 1, Integer.MAX_VALUE);
+
+        return addNew(new Asset(id, name, color, price, weight, quantity));
+    }
+
 
     @SuppressWarnings("unchecked")
     public boolean updateAsset() {
@@ -107,6 +105,25 @@ public class AssetList extends ObjectList<Asset> {
         // Make a copy of a for failure situation
         Asset cpyA = new Asset(a.getId(), a.getName(), a.getColor(), a.getPrice(), a.getWeight(),
                 a.getQuantity() - req.getQuantity());
+
+        this.set(index, cpyA);
+
+        // Try to write to file, if it fails, set back old values
+        if (!IOExecutor.writeToFile(getPath(), (List) this)) {
+            this.set(index, a);
+            return false;
+        }
+
+        return true;
+    }
+    @SuppressWarnings("unchecked")
+    public boolean updateAssetQuantity(Borrow borrow) {
+        int index = this.searchByIdInt(borrow.getAssetId());
+        Asset a = this.get(index);
+
+        // Make a copy of a for failure situation
+        Asset cpyA = new Asset(a.getId(), a.getName(), a.getColor(), a.getPrice(), a.getWeight(),
+                a.getQuantity() + borrow.getQuantity());
 
         this.set(index, cpyA);
 

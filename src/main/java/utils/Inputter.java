@@ -70,6 +70,9 @@ public class Inputter {
             try {
                 String s = getString(prompt);
                 num = Integer.parseInt(s);
+
+                if (num < min || num > max)
+                    System.out.println("Please enter an integer number from " + min + " to " + max);
             } catch (NumberFormatException e) {
                 System.out.println("Please enter an integer number");
             }
@@ -85,6 +88,9 @@ public class Inputter {
                 if (s.isEmpty())
                     return -1;
                 num = Integer.parseInt(s);
+
+                if (num < min || num > max)
+                    System.out.println("Please enter an integer number from " + min + " to " + max);
             } catch (NumberFormatException e) {
                 System.out.println("Please enter an integer number");
             }
@@ -111,6 +117,9 @@ public class Inputter {
             try {
                 String s = getString(prompt);
                 num = Double.parseDouble(s);
+
+                if (num < min || num > max)
+                    System.out.println("Please enter a double number from " + min + " to " + max);
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a double number");
             }
@@ -126,6 +135,9 @@ public class Inputter {
                 if (s.isEmpty())
                     return -1;
                 num = Double.parseDouble(s);
+
+                if (num < min || num > max)
+                    System.out.println("Please enter an integer number from " + min + " to " + max);
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a double number");
             }

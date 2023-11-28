@@ -20,6 +20,10 @@ public class Main {
             EmployeeList employees = DataInitiator.employees;
             Employee em = null;
 
+            requests.showAll();
+            assets.showAll();
+            borrows.showAll();
+
             // Prompt user to choose option
             int choice;
             do {
@@ -34,10 +38,13 @@ public class Main {
                     case 5 -> Executor.approveRequest(requests, borrows, assets, em);
                     case 6 -> Executor.showAllBorrowReqs(borrows, em);
                     case 7 -> Executor.findAssetsByName(assets, em);
-                    case 8 -> em = Executor.logUserOut(em);
+                    case 8 -> Executor.sendANewRequest(assets, requests, em);
+                    case 9 -> Executor.cancelRequest(requests, em);
+                    case 10 -> Executor.returnBorrowRequest(assets, borrows, requests, em);
+                    case 11 -> em = Executor.logUserOut(em);
                     default -> System.out.println("Exiting...");
                 }
-            } while (choice >= 1 && choice <= 8);
+            } while (choice >= 1 && choice <= 11);
 
             Inputter.scanner.close();
         } catch (UnsupportedEncodingException e) {

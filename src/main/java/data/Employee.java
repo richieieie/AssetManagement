@@ -38,6 +38,15 @@ public class Employee implements Serializable, DataRow {
         return true;
     }
 
+    public static boolean checkStatus(Employee em) {
+        if (Objects.isNull(em)) {
+            System.out.println("You must log in before using the program!!!");
+            return false;
+        }
+
+        return true;
+    }
+
     public String getId() {
         return id;
     }
