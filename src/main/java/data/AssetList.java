@@ -22,6 +22,7 @@ public class AssetList extends ObjectList<Asset> {
 
         cpyA.showAll();
     }
+
     public Asset searchById(String id) {
         for (Asset a : this) {
             if (a.getId().equals(id))
@@ -57,14 +58,16 @@ public class AssetList extends ObjectList<Asset> {
 
     @SuppressWarnings("unchecked")
     public boolean updateAsset() {
+        this.showAll();
+
         // Get asset's id from user
         String id;
-        do {
-            id = Inputter.getString("ID (A000): ", "[Aa]\\d{3}", "Please enter with " +
-                    "(A000) " + "format").toUpperCase();
-            if (objectNotFound(id))
-                System.out.println("Asset doesn't exist");
-        } while (objectNotFound(id));
+        id = Inputter.getString("ID (A000): ", "[Aa]\\d{3}", "Please enter with " +
+                "(A000) " + "format").toUpperCase();
+        if (objectNotFound(id)) {
+            System.out.println("Asset doesn't exist");
+            return false;
+        }
 
         // Get update's info from user
         String name = Inputter.getStringEmpty("Name: ");
@@ -116,6 +119,7 @@ public class AssetList extends ObjectList<Asset> {
 
         return true;
     }
+
     @SuppressWarnings("unchecked")
     public boolean updateAssetQuantity(Borrow borrow) {
         int index = this.searchByIdInt(borrow.getAssetId());

@@ -32,6 +32,8 @@ public class RequestList extends ObjectList<Request> {
     }
 
     public boolean sendNew(Employee em, AssetList assetList) {
+        assetList.showAll();
+
         // Prompt employee to enter an assetId and check it
         String assetID = Inputter.getString("ID (A000): ", "[Aa]\\d{3}", "Please enter with " +
                 "(A000) " + "format").toUpperCase();
@@ -82,14 +84,16 @@ public class RequestList extends ObjectList<Request> {
     }
 
     public boolean approveOne(AssetList assetsSource, BorrowList borrowsSource) {
+        this.showAll();
+
         // Find request by ID
         String id;
-        do {
-            id = Inputter.getString("ID (R000): ", "[Rr]\\d{3}", "Please enter with " +
-                    "(R000) " + "format").toUpperCase();
-            if (objectNotFound(id))
-                System.out.println("Request doesn't exist");
-        } while (objectNotFound(id));
+        id = Inputter.getString("ID (R000): ", "[Rr]\\d{3}", "Please enter with " +
+                "(R000) " + "format").toUpperCase();
+        if (objectNotFound(id)) {
+            System.out.println("Request doesn't exist");
+            return false;
+        }
         Request r = searchById(id);
 
         // Check asset quantity in assets source

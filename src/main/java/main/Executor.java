@@ -112,12 +112,17 @@ public class Executor {
         if (!Employee.checkStatus(e, "MA"))
             return;
 
-        assetList.showAll();
+        int subChoice;
+        do {
+            Visual.printMenu(new String[]{"Continue updating"});
+            subChoice = Inputter.getInt("Your choice: ");
 
-        if (!assetList.updateAsset())
-            System.out.println("Failed to update the asset!!!");
-        else
-            System.out.println("The asset is updated");
+            if (subChoice == 1) {
+                if (assetList.updateAsset())
+                    System.out.println("The asset is updated!!!");
+            }
+
+        } while (subChoice == 1);
     }
 
     public static void findAssetsByName(AssetList assetList, Employee e) {
@@ -132,7 +137,6 @@ public class Executor {
         if (!Employee.checkStatus(e))
             return;
 
-        assetList.showAll();
         int subChoice;
         do {
             Visual.printMenu(new String[]{"Send request"});
@@ -154,11 +158,16 @@ public class Executor {
         if (!Employee.checkStatus(e, "MA"))
             return;
 
-        requestList.showAll();
+        int subChoice;
+        do {
+            Visual.printMenu(new String[]{"Continue approving"});
+            subChoice = Inputter.getInt("Your choice: ");
 
-        if (!requestList.approveOne(assetList, borrowList))
-            System.out.println("Failed to approve this request!!!");
-        else
-            System.out.println("The request is approved");
+            if (subChoice == 1) {
+                if (requestList.approveOne(assetList, borrowList))
+                    System.out.println("The request is approved");
+            }
+
+        } while (subChoice == 1);
     }
 }
