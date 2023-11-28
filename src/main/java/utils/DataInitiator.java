@@ -11,13 +11,13 @@ public class DataInitiator {
     public static BorrowList borrows = new BorrowList("src/main/resources/borrow.dat");
     public static RequestList requests = new RequestList("src/main/resources/request.dat");
     public static EmployeeList employees = new EmployeeList("src/main/resources/employee.dat");
-    public static String[] menuOptions = {"Login", "Register an account (Only MA)", "Search asset " +
-            "by " +
-            "name " +
-            "(DESCENDING) (Only MA)", "Create " +
+    public static String[] menuOptions = {"Login", "Register an account (Only MA)", "Create " +
             "new asset (Only MA)", "Updating " +
             "asset's information (Only MA)", "Approve the request of employee (Only MA)", "Show list of " +
-            "borrow asset (Only MA)", "Log out"};
+            "borrow asset (Only MA)", "Search asset " +
+            "by " +
+            "name " +
+            "(DESCENDING)", "Borrow the assets", "Cancel request", "Return asset", "Log out"};
 
     public static void addAll() throws UnsupportedEncodingException {
         addRawAssets(assets);

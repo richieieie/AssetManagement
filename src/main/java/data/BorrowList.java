@@ -3,6 +3,10 @@ package data;
 import utils.Visual;
 
 public class BorrowList extends ObjectList<Borrow> {
+    public BorrowList() {
+        super();
+    }
+
     public BorrowList(String path) {
         super(path);
     }

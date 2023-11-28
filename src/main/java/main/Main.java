@@ -29,11 +29,11 @@ public class Main {
                 switch (choice) {
                     case 1 -> em = Executor.logUserIn(employees, em);
                     case 2 -> Executor.registerAccount(employees, em);
-                    case 3 -> Executor.findAssets(assets, em);
-                    case 4 -> Executor.createAsset(assets, em);
-                    case 5 -> Executor.editAsset(assets, em);
-                    case 6 -> Executor.approveRequest(requests, borrows, assets, em);
-                    case 7 -> Executor.findBorrows(borrows, em);
+                    case 3 -> Executor.createAsset(assets, em);
+                    case 4 -> Executor.editAsset(assets, em);
+                    case 5 -> Executor.approveRequest(requests, borrows, assets, em);
+                    case 6 -> Executor.showAllBorrowReqs(borrows, em);
+                    case 7 -> Executor.findAssetsByName(assets, em);
                     case 8 -> em = Executor.logUserOut(em);
                     default -> System.out.println("Exiting...");
                 }

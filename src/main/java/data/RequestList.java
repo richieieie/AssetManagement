@@ -4,6 +4,10 @@ import utils.Inputter;
 import utils.Visual;
 
 public class RequestList extends ObjectList<Request> {
+    public RequestList() {
+        super();
+    }
+
     public RequestList(String path) {
         super(path);
     }

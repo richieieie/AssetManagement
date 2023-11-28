@@ -11,6 +11,10 @@ import static utils.Inputter.decode;
 import static utils.Inputter.getString;
 
 public class EmployeeList extends ObjectList<Employee> {
+    public EmployeeList() {
+        super();
+    }
+
     public EmployeeList(String path) {
         super(path);
     }

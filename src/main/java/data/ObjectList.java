@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class ObjectList<T> extends ArrayList<T> {
-    private final String path;
+    private String path = "";
+
+    public ObjectList() {
+
+    }
 
     @SuppressWarnings("unchecked")
     public ObjectList(String path) {

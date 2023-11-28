@@ -6,18 +6,23 @@ import utils.Visual;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class AssetList extends ObjectList<Asset> {
+    public AssetList() {
+        super();
+    }
+
     public AssetList(String path) {
         super(path);
     }
 
     public void searchAssetsByName(String name) {
-        this
-                .stream()
-                .filter(a -> a.getName().toLowerCase().contains(name.toLowerCase()))
-                .sorted((a1, a2) -> -a1.getName().compareTo(a2.getName()))
-                .forEach(System.out::println);
+        AssetList cpyA = new AssetList();
+        cpyA.addAll(this.stream().filter(a -> a.getName().toLowerCase().contains(name.toLowerCase())).toList());
+
+        Visual.printDataList(cpyA, new String[]{"ID", "Name", "Color", "Price", "Weight",
+                "Quantity"}, "ASSETS");
     }
 
     public boolean createNewAsset() {
@@ -51,6 +56,7 @@ public class AssetList extends ObjectList<Asset> {
 
         return -1;
     }
+
     @SuppressWarnings("unchecked")
     public boolean updateAsset() {
         // Get asset's id from user
@@ -92,6 +98,7 @@ public class AssetList extends ObjectList<Asset> {
 
         return true;
     }
+
     @SuppressWarnings("unchecked")
     public boolean updateAssetQuantity(Request req) {
         int index = this.searchByIdInt(req.getAssetId());

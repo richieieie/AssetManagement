@@ -62,7 +62,7 @@ public class Executor {
         } while (subChoice == 1);
     }
 
-    public static void findBorrows(BorrowList borrowList, Employee e) {
+    public static void showAllBorrowReqs(BorrowList borrowList, Employee e) {
         if (!Employee.checkStatus(e, "MA"))
             return;
 
@@ -79,10 +79,11 @@ public class Executor {
             System.out.println("The asset is updated");
     }
 
-    public static void findAssets(AssetList assetList, Employee e) {
-        if (!Employee.checkStatus(e, "MA"))
+    public static void findAssetsByName(AssetList assetList, Employee e) {
+        if (Objects.isNull(e)) {
+            System.out.println("You must log in before using the program!!!");
             return;
-
+        }
         assetList.searchAssetsByName(Inputter.getStringWithCap("Name: "));
     }
 
