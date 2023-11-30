@@ -14,7 +14,9 @@ public class Employee implements Serializable, DataRow {
     private String role;
     private String sex;
     private String password;
+    public Employee() {
 
+    }
     public Employee(String id, String name, LocalDate birthdate, String role, String sex,
                     String password) {
         this.id = id;

@@ -11,6 +11,16 @@ public class DataInitiator {
     public static BorrowList borrows = new BorrowList("src/main/resources/borrow.dat");
     public static RequestList requests = new RequestList("src/main/resources/request.dat");
     public static EmployeeList employees = new EmployeeList("src/main/resources/employee.dat");
+
+    // You can delete this method and all dat files if you don't want to initialize raw
+    // data. You can change the path name to store dat files in DataInitiator.java
+    static {
+        try {
+            addAll(assets, borrows, requests, employees);
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("Failed to encode employees' passwords");
+        }
+    }
     public static String[] menuOptions = {"Login", "Register an account (Only MA)", "Create " +
             "new asset (Only MA)", "Updating " +
             "asset's information (Only MA)", "Approve the request of employee (Only MA)", "Show list of " +
@@ -19,7 +29,8 @@ public class DataInitiator {
             "name " +
             "(DESCENDING)", "Borrow the assets", "Cancel request", "Return asset", "Log out"};
 
-    public static void addAll() throws UnsupportedEncodingException {
+    public static void addAll(AssetList assets, BorrowList borrows, RequestList requests,
+                              EmployeeList employees) throws UnsupportedEncodingException {
         addRawAssets(assets);
         addRawBorrows(borrows);
         addRawRequests(requests);

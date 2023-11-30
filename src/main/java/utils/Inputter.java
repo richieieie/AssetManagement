@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Base64;
 import java.util.Objects;
 import java.util.Random;
@@ -25,6 +26,7 @@ public class Inputter {
             s = scanner.nextLine();
         } while (s.isEmpty());
 
+        scanner.reset();
         return s.trim();
     }
     public static String getString(String prompt, String regex, String errMsg) {
@@ -146,10 +148,19 @@ public class Inputter {
     }
 
     public static LocalDate getLocalDate(String prompt) {
-        String date = Inputter.getString(prompt, "\\d{2}/\\d{2}/\\d{4}",
-                "Please " + "enter with " + "DD/MM/YYYY format");
+        LocalDate localDate;
+        do {
+            try {
+                String date = Inputter.getString(prompt, "\\d{2}/\\d{2}/\\d{4}",
+                        "Please " + "enter with " + "DD/MM/YYYY format");
+                localDate = LocalDate.parse(date, formatterHalf);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date");
+                localDate = null;
+            }
+        } while (Objects.isNull(localDate));
 
-        return LocalDate.parse(date, formatterHalf);
+        return localDate;
     }
 
     public static String capitalizeWords(String input) {
@@ -178,7 +189,7 @@ public class Inputter {
             id = prefix + String.format("%03d", num);
         } while (!Objects.isNull(ol.searchById(id)));
 
-        return id.trim();
+        return id;
     }
 
     public static String encode(String p) throws UnsupportedEncodingException {

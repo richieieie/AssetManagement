@@ -11,11 +11,20 @@ public class Executor {
         if (!Employee.checkStatus(e, "MA"))
             return;
 
-        if (Objects.isNull(employeeList.register())) {
-            return;
-        }
+        Employee newE;
+        int subChoice;
+        do {
+            Visual.printMenu(new String[]{"Continue registering"});
+            subChoice = Inputter.getInt("Your choice: ");
 
-        System.out.println("Registered");
+            if (subChoice == 1) {
+                newE = employeeList.register();
+                if (!Objects.isNull(newE))
+                    System.out.println("Registered a new employee with ID: " + newE.getId());
+            }
+
+        } while (subChoice == 1);
+
     }
 
     public static Employee logUserIn(EmployeeList employeeList, Employee e) {
@@ -119,7 +128,7 @@ public class Executor {
 
             if (subChoice == 1) {
                 if (assetList.updateAsset())
-                    System.out.println("The asset is updated!!!");
+                    System.out.println("The asset is updated");
             }
 
         } while (subChoice == 1);

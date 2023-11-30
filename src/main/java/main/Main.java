@@ -5,19 +5,15 @@ import utils.DataInitiator;
 import utils.Inputter;
 import utils.Visual;
 
-import java.io.UnsupportedEncodingException;
-
 public class Main {
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        // You can delete this method and all dat files if you don't want to initialize raw
-        // data. You can change the path name to store dat files in DataInitiator.java
-        DataInitiator.addAll();
-
+    public static void main(String[] args) {
         AssetList assets = DataInitiator.assets;
         RequestList requests = DataInitiator.requests;
         BorrowList borrows = DataInitiator.borrows;
         EmployeeList employees = DataInitiator.employees;
         Employee em = null;
+
+        employees.showAll();
 
         // Prompt user to choose option
         int choice;
@@ -40,6 +36,8 @@ public class Main {
                 default -> System.out.println("Exiting...");
             }
         } while (choice >= 1 && choice <= 11);
+
+        employees.showAll();
 
         Inputter.scanner.close();
     }
