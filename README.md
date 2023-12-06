@@ -30,45 +30,46 @@ This console application, developed using Java 19, serves as a tool for overseei
 **Run**
 
 - If it is the first time you run the project, the result below will be shown:
-![Alt text](file:///Users/trung/Desktop/Screenshot%202023-12-06%20at%2010.49.27.png)
+![Screenshot 2023-12-06 at 10 49 27](https://github.com/richietrung/Asset-Management/assets/109566798/5702b2db-2fd0-4235-9a03-7e65d9b25f83)
+
 
 
 
 ## **Using**
-    1. Login:
+1. Login:
 - Request an employee to log in by providing their ID and password.
 
-    2. Register (Only for manager):
+2. Register (Only for manager):
 - Allow a manager to create a new account.
 
-    3. Create new asset (Only for manager):
+3. Create new asset (Only for manager):
 - Enable a manager to add a new asset to the database.
 
-    4. Updating asset's information (Only for manager):
+4. Updating asset's information (Only for manager):
 - Prompt a manager to input an asset's ID and modify its information.
 
-    5. Approve the request of employee (Only for manager):
+5. Approve the request of employee (Only for manager):
 - Display all requests from employees to borrow assets and allow the manager to choose which requests to approve.
 
-    6. Show list of borrow asset (Only for manager):
+6. Show list of borrow asset (Only for manager):
 - Display all assets currently borrowed by the employee.
 
-    7. Search asset by name (DESCENDING):
+7. Search asset by name (DESCENDING):
 - Prompt the employee to enter a string and display all assets containing that string, arranged in descending order.
 
-    8. Borrow the assets:
+8. Borrow the assets:
 - Allow employees to submit requests for borrowing assets.
 
-    9. Cancel request:
+9. Cancel request:
 - Enable employees to cancel a request before it is approved by a manager.
 
-    10. Return assets:
+10. Return assets:
 - Allow employees to select assets for return.
 
-    11. Log out:
+11. Log out:
 - Logout the current employee from the system.
 
-  12. Others - Quit:
+12. Others - Quit:
 - Shut down the system.
 
 
