@@ -36,8 +36,6 @@ public class Main {
             }
         } while (choice >= 1 && choice <= 11);
 
-        employees.showAll();
-
         Inputter.scanner.close();
     }
 }
