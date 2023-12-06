@@ -7,13 +7,12 @@ import utils.Visual;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println(System.getProperty("java.version"));
         AssetList assets = DataInitiator.assets;
         RequestList requests = DataInitiator.requests;
         BorrowList borrows = DataInitiator.borrows;
         EmployeeList employees = DataInitiator.employees;
         Employee em = null;
-
-        employees.showAll();
 
         // Prompt user to choose option
         int choice;
